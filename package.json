@@ -1,0 +1,32 @@
+{
+  "name": "react-comments",
+  "version": "1.0.0",
+  "description": "react comments",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js && watchify index.js -o public/bundle.js",
+    "test": "test",
+    "watch": "watchify index.js -o public/bundle.js"
+  },
+  "author": "dobiedad",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-monkey": "^1.29.2",
+    "chai": "^3.5.0",
+    "electron-prebuilt": "^1.2.1",
+    "karma": "^0.13.22",
+    "karma-browserify": "^5.0.5",
+    "karma-electron-launcher": "^0.1.0",
+    "karma-mocha": "^1.0.1",
+    "karma-mocha-reporter": "^2.0.4",
+    "mocha": "^2.5.3",
+    "watchify": "^3.7.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "browserify": "^13.0.1",
+    "express": "^4.14.0",
+    "react": "^15.2.0",
+    "react-dom": "^15.2.0"
+  }
+}
