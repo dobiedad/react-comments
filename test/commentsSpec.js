@@ -16,13 +16,36 @@ describe('Comments', function() {
     ReactDOM.render(R.createElement(Home, null), div);
     browser = browserMonkey.scope(div)
   })
+  describe('Displays comment form', function() {
 
-  it('shows the title', function() {
-    return browser.find('h1',{text:'Comments'}).shouldExist()
-  });
+    it('shows the title', function() {
+      return browser.find('h1',{text:'Comments'}).shouldExist()
+    });
 
-  it('allows me to write a new comment', function() {
-    return browser.find('textarea').typeIn('first comment yo!')
-  });
+    it('allows me to type a new comment', function() {
+      return browser.find('textarea').typeIn('first comment yo!')
+    });
+
+    it('allows me to submit the new comment', function() {
+      return browser.find('button',{text:'Add comment'}).click()
+    });
+
+  })
+
+  describe('new comment', function() {
+
+    it('shows when no one has posted a comment', function() {
+      return browser.find('h4',{text:'0 comments'}).shouldExist();
+    });
+
+    it('clears the input when submitting', function() {
+      return browser.find('textarea').typeIn('first comment yo!').then(function(){
+        return browser.find('button',{text:'Add comment'}).click().then(function(){
+          return browser.find('textarea',{value:'first comment yo!'}).shouldNotExist()
+        });
+      })
+    });
+
+  })
 
 });
