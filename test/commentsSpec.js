@@ -16,7 +16,7 @@ describe('Comments', function() {
     ReactDOM.render(R.createElement(Home, null), div);
     browser = browserMonkey.scope(div)
   })
-  describe('Displays comment form', function() {
+  describe('Displays comment box', function() {
 
     it('shows the title', function() {
       return browser.find('h1',{text:'Comments'}).shouldExist()
@@ -35,7 +35,7 @@ describe('Comments', function() {
   describe('new comment', function() {
 
     it('shows when no one has posted a comment', function() {
-      return browser.find('h4',{text:'0 comments'}).shouldExist();
+      return browser.find('h4',{text:'total: 0'}).shouldExist();
     });
 
     it('clears the input when submitting', function() {
@@ -45,6 +45,24 @@ describe('Comments', function() {
         });
       })
     });
+
+    describe('displaying new comment', function() {
+
+      beforeEach(function(){
+        return browser.find('textarea').typeIn('first comment yo!').then(function(){
+          return browser.find('button',{text:'Add comment'}).click()
+        })
+      })
+
+      it('shows my new comment', function() {
+        return browser.find('h4',{text:'total: 1'}).shouldExist().then(function(){
+          return browser.find('li',{text:'first comment yo!'}).shouldExist();
+        })
+      });
+
+
+    })
+
 
   })
 
