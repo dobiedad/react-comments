@@ -21,4 +21,8 @@ describe('Comments', function() {
     return browser.find('h1',{text:'Comments'}).shouldExist()
   });
 
+  it('allows me to write a new comment', function() {
+    return browser.find('textarea').typeIn('first comment yo!')
+  });
+
 });
