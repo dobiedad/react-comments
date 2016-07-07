@@ -19,10 +19,10 @@ var Home = R.createClass({
   render: function () {
     var self = this;
     return (
-      R.createElement("div", {},
+      R.createElement("div", {id:'comments'},
         R.createElement("h1", {}, "Comments"),
         R.createElement("div", {},
-         R.createElement("h4", {}, "total: " + this.state.comments.length),
+         R.createElement("h4", {}, "Total: " + this.state.comments.length),
          R.createElement("ul", {},
           this.state.comments.map(function(comment){
             return R.createElement("li", {key:self.state.comments.indexOf(comment)},

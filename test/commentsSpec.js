@@ -38,7 +38,7 @@ describe('Comments', function() {
 
   describe('new comment', function() {
     it('shows when no one has posted a comment', function() {
-      return browser.find('h4',{text:'total: 0'}).shouldExist();
+      return browser.find('h4',{text:'Total: 0'}).shouldExist();
     });
 
     it('does not allow empty comments', function() {
@@ -67,7 +67,7 @@ describe('Comments', function() {
       })
 
       it('shows my new comment', function() {
-        return browser.find('h4',{text:'total: 1'}).shouldExist().then(function(){
+        return browser.find('h4',{text:'Total: 1'}).shouldExist().then(function(){
           return browser.find('li',{text:'first comment yo!'}).shouldExist().then(function (){
             return browser.find('h6',{text:'Max'}).shouldExist()
           })
