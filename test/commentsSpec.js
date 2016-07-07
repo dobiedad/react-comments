@@ -26,8 +26,8 @@ describe('Comments', function() {
       return browser.find('textarea').typeIn('first comment yo!')
     });
 
-    it('allows me to submit the new comment', function() {
-      return browser.find('button',{text:'Add comment'}).click()
+    it('shows submit button', function() {
+      return browser.find('button',{text:'Add comment'}).shouldExist()
     });
 
   })
@@ -36,6 +36,10 @@ describe('Comments', function() {
 
     it('shows when no one has posted a comment', function() {
       return browser.find('h4',{text:'total: 0'}).shouldExist();
+    });
+
+    it('does not allow empty comments', function() {
+      return expect(browser.find('button',{text:'Add comment'})).to.be.disabled;
     });
 
     it('clears the input when submitting', function() {

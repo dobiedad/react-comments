@@ -34,14 +34,25 @@ var Home = R.createClass({
     );
   }
 
-});
+})
 
 var commentBox = R.createClass({
+
+  getInitialState: function () {
+    return {
+      emptyComment:true
+    }
+  },
 
   newComment: function () {
     var value = this.refs.commentInput.value
     this.props.addComment(value)
-    this.refs.commentInput.value = '';
+    this.refs.commentInput.value = "";
+    return this.setState({ emptyComment: true });
+  },
+
+  checkCommentValue: function () {
+    return this.setState({ emptyComment: !this.refs.commentInput.value});
   },
 
   render: function () {
@@ -49,12 +60,15 @@ var commentBox = R.createClass({
       R.createElement("div", {},
         R.createElement('textarea', {
          placeholder: 'New comment...',
-         ref:'commentInput'
+         ref:'commentInput',
+         onChange:this.checkCommentValue
        }),
-       R.createElement('button', {onClick:this.newComment},'Add comment')
+       R.createElement('button', {onClick:this.newComment,disabled:this.state.emptyComment},'Add comment'),
+       R.createElement("div", {},this.commentIsEmpty)
       )
     );
   }
+  
 })
 
 module.exports = Home;
