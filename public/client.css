@@ -1,0 +1,29 @@
+#comments{
+  max-width: 720px;
+  margin: auto;
+}
+h1,h4{
+  text-align: center;
+}
+h6{
+  margin: 0px;
+}
+input,textarea,button{
+  display: block;
+  max-width: 320px;
+  width: 100%;
+  margin: auto;
+  min-height: 30px;
+  margin-bottom: 20px;
+}
+ul{
+  display: block;
+  max-width: 320px;
+  width: 100%;
+  margin: auto;
+  list-style: none;
+  padding: 0px;
+
+}
+li{
+}

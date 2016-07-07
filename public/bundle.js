@@ -17,22 +17,48 @@ var Home = R.createClass({
     })
   },
 
+  deleteComment: function (comment) {
+    var index = this.state.comments.indexOf(comment);
+    this.state.comments.splice(index, 1);
+    this.setState({
+      comments:this.state.comments
+    })
+  },
+
   render: function () {
     var self = this;
     return (
       R.createElement("div", {id:'comments'},
         R.createElement("h1", {}, "Comments"),
         R.createElement("div", {},
-         R.createElement("h4", {}, "Total: " + this.state.comments.length),
-         R.createElement("ul", {},
-          this.state.comments.map(function(comment){
-            return R.createElement("li", {key:self.state.comments.indexOf(comment)},
-              R.createElement("h6", {}, comment.name)
-            , comment.body)
-          })
-         )
+         R.createElement(commentList, {comments:this.state.comments, deleteComment:this.deleteComment},"")
         ),
         R.createElement(commentBox, {addComment:this.addComment},"")
+      )
+    );
+  }
+
+})
+
+var commentList = R.createClass({
+
+  destroy: function () {
+    return this.props.deleteComment(comment)
+  },
+
+  render: function () {
+    var propComments = this.props.comments
+    var deleteComment = this.props.deleteComment
+    return (
+      R.createElement("h4", {}, "Total: " + this.props.comments.length),
+      R.createElement("ul", {},
+       propComments.map(function(comment){
+         return R.createElement("li", {key:propComments.indexOf(comment)},
+           R.createElement("h6", {}, comment.name)
+         , comment.body,
+         R.createElement("button", {onClick:deleteComment}, 'Delete')
+       )
+       })
       )
     );
   }

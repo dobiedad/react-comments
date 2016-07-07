@@ -72,7 +72,16 @@ describe('Comments', function() {
             return browser.find('h6',{text:'Max'}).shouldExist()
           })
         })
-      });
+      })
+
+      it('allows me to delete the comment', function() {
+        return browser.find('li',{text:'first comment yo!'}).shouldExist().then(function(){
+          return browser.find('button',{text:'Delete'}).click().then(function(){
+            return browser.find('li',{text:'first comment yo!'}).shouldNotExist()
+          })
+        })
+      })
+
     })
   })
 });
