@@ -25,7 +25,9 @@ var Home = R.createClass({
          R.createElement("h4", {}, "total: " + this.state.comments.length),
          R.createElement("ul", {},
           this.state.comments.map(function(comment){
-            return R.createElement("li", {key:self.state.comments.indexOf(comment)}, comment)
+            return R.createElement("li", {key:self.state.comments.indexOf(comment)},
+              R.createElement("h6", {}, comment.name)
+            , comment.body)
           })
          )
         ),
@@ -40,35 +42,44 @@ var commentBox = R.createClass({
 
   getInitialState: function () {
     return {
-      emptyComment:true
+      emptyValue:true
     }
   },
 
   newComment: function () {
-    var value = this.refs.commentInput.value
-    this.props.addComment(value)
-    this.refs.commentInput.value = "";
-    return this.setState({ emptyComment: true });
+    var comment = {
+      name:this.refs.nameInput.value,
+      body:this.refs.commentArea.value
+    }
+    this.props.addComment(comment)
+    this.refs.commentArea.value = "";
+    this.refs.nameInput.value = "";
+    return this.setState({ emptyValue: true });
   },
 
-  checkCommentValue: function () {
-    return this.setState({ emptyComment: !this.refs.commentInput.value});
+  checkValue: function () {
+    return this.setState({ emptyValue: !this.refs.commentArea.value || !this.refs.nameInput.value});
   },
 
   render: function () {
     return (
       R.createElement("div", {},
+        R.createElement('input', {
+         placeholder: 'Your name...',
+         ref:'nameInput',
+         onChange:this.checkValue
+       }),
         R.createElement('textarea', {
          placeholder: 'New comment...',
-         ref:'commentInput',
-         onChange:this.checkCommentValue
+         ref:'commentArea',
+         onChange:this.checkValue
        }),
-       R.createElement('button', {onClick:this.newComment,disabled:this.state.emptyComment},'Add comment'),
+       R.createElement('button', {onClick:this.newComment,disabled:this.state.emptyValue},'Add comment'),
        R.createElement("div", {},this.commentIsEmpty)
       )
     );
   }
-  
+
 })
 
 module.exports = Home;
