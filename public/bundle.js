@@ -28,11 +28,9 @@ var Home = R.createClass({
   render: function () {
     var self = this;
     return (
-      R.createElement("div", {id:'comments'},
+      R.createElement("div", {},
         R.createElement("h1", {}, "Comments"),
-        R.createElement("div", {},
-         R.createElement(commentList, {comments:this.state.comments, deleteComment:this.deleteComment},"")
-        ),
+        R.createElement(commentList, {comments:this.state.comments, deleteComment:this.deleteComment},""),
         R.createElement(commentBox, {addComment:this.addComment},"")
       )
     );
@@ -50,15 +48,17 @@ var commentList = R.createClass({
     var propComments = this.props.comments
     var deleteComment = this.props.deleteComment
     return (
-      R.createElement("h4", {}, "Total: " + this.props.comments.length),
-      R.createElement("ul", {},
-       propComments.map(function(comment){
-         return R.createElement("li", {key:propComments.indexOf(comment)},
-           R.createElement("h6", {}, comment.name)
-         , comment.body,
-         R.createElement("button", {onClick:deleteComment}, 'Delete')
-       )
-       })
+      R.createElement("div", {},
+        R.createElement("h4", {}, "Total: " + propComments.length),
+        R.createElement("ul", {},
+         propComments.map(function(comment){
+           return R.createElement("li", {key:propComments.indexOf(comment)},
+             R.createElement("h6", {}, comment.name)
+           , comment.body,
+           R.createElement("button", {onClick:deleteComment}, 'Delete')
+         )
+         })
+        )
       )
     );
   }

@@ -1,4 +1,4 @@
-#comments{
+body div:first-of-type{
   max-width: 720px;
   margin: auto;
 }
@@ -25,5 +25,6 @@ ul{
   padding: 0px;
 
 }
-li{
+li button{
+  width: 90px;
 }
